@@ -2,17 +2,9 @@
 
 class Track
 
-  def initialize(segments, name="")
+  def initialize(segments, name = "")
     @name = name
     @segments = segments
-    
-    segment_objects = []
-    
-    segments.each do |segment|
-      segment_objects.append(TrackSegment.new(segment))
-    end
-    
-    @segments = segment_objects
   end
 
   def get_track_json
@@ -22,9 +14,9 @@ class Track
       json += '"properties": {"title": "' + @name + '"},'
     end
 
-    json += '"geometry": {"type": "MultiLineString","coordinates": ['
+    json += '"geometry": {"type": "MultiLineString","coordinates": [' # use type
 
-    @segments.each_with_index do |segment, index|
+    @segments.each_with_index do |segment, index| # extract object into code
       if index > 0
         json += ","
       end
@@ -152,8 +144,12 @@ def main()
     Point.new(-122, 45.5),
   ]
 
-  t = Track.new([ts1, ts2], "track 1")
-  t2 = Track.new([ts3], "track 2")
+  track_segment1 = TrackSegment.new(ts1)
+  track_segment2 = TrackSegment.new(ts2)
+  track_segment3 = TrackSegment.new(ts3)
+
+  t = Track.new([track_segment1, track_segment2], "track 1")
+  t2 = Track.new([track_segment3], "track 2")
 
   world = World.new("My Data", [w, w2, t, t2])
 
