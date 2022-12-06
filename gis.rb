@@ -1,20 +1,24 @@
 #!/usr/bin/env ruby
 
 class Track
-  def initialize(segments, name=nil)
+
+  def initialize(segments, name="")
     @name = name
+    @segments = segments
+    
     segment_objects = []
+    
     segments.each do |s|
       segment_objects.append(TrackSegment.new(s))
     end
-    # set segments to segment_objects
+    
     @segments = segment_objects
   end
 
   def get_track_json()
     j = '{'
     j += '"type": "Feature", '
-    if @name != nil
+    if @name != ""
       j+= '"properties": {'
       j += '"title": "' + @name + '"'
       j += '},'
