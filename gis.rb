@@ -8,8 +8,8 @@ class Track
     
     segment_objects = []
     
-    segments.each do |s|
-      segment_objects.append(TrackSegment.new(s))
+    segments.each do |segment|
+      segment_objects.append(TrackSegment.new(segment))
     end
     
     @segments = segment_objects
@@ -52,15 +52,17 @@ class Track
     j + ']}}'
   end
 end
+
 class TrackSegment
   attr_reader :coordinates
+
   def initialize(coordinates)
     @coordinates = coordinates
   end
+
 end
 
 class Point
-
   attr_reader :lat, :lon, :ele
 
   def initialize(lon, lat, ele=nil)
@@ -68,12 +70,10 @@ class Point
     @lat = lat
     @ele = ele
   end
+
 end
 
 class Waypoint
-
-
-
 attr_reader :lat, :lon, :ele, :name, :type
 
   def initialize(lon, lat, ele=nil, name=nil, type=nil)
@@ -112,10 +112,12 @@ attr_reader :lat, :lon, :ele, :name, :type
 end
 
 class World
-def initialize(name, things)
-  @name = name
-  @features = things
-end
+
+  def initialize(name, things)
+    @name = name
+    @features = things
+  end
+  
   def add_feature(f)
     @features.append(t)
   end
